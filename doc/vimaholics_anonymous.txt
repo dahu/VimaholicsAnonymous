@@ -1,0 +1,86 @@
+*vimaholics_anonymous.txt*	Anonymous Functions for VimL
+
+
+			VIM REFERENCE MANUAL	by Barry Arthur
+
+
+Help on using Vimaholics Anonymous                  *vimaholics_anonymous*
+
+1. Introduction |vimaholics_anonymous-intro|
+2. Functions    |vimaholics_anonymous-functions|
+3. Examples     |vimaholics_anonymous-examples|
+
+==============================================================================
+ 1. INTRODUCTION                              *vimaholics_anonymous-intro*
+
+Vimaholics Anonymous provides anonymous functions for Vim. The |va-Fn()|
+function declares an anonymous function and the |va-Fx()| function executes an
+anonymous function. An example can be found at
+http://of-vim-and-vigor.blogspot.com/2014/01/anonymous-functions-in-viml.html
+and the plugin https://dahu.github.com/UTest relies on Vimaholics Anonymous.
+
+==============================================================================
+
+2. FUNCTIONS                             *vimaholics_anonymous-functions*
+
+                                     *vimaholics_anonymous-Fn()* *va-Fn()*
+Fn() : Declare anonymous function~
+
+Fn() takes a string holding the arguments and function body statements of the
+anonymmous function. The format is as follows:
+
+  ( arguments separated by comma ) => statements separated by pipe
+
+The last statement will be implicitly returned.
+
+Example:
+>
+  let Mul = Fn(' (a, b) => a:a * a:b ')
+<
+
+Declares an anonymous function which takes two arguments and returns their
+product.
+
+NOTE: You must still refer to arguments within the body of the
+anonymous function using Vim's |a:var| notation.
+
+                                     *vimaholics_anonymous-Fx()* *va-Fx()*
+Fx() : Execute anonymous function~
+
+Anonymous functions can be stored in variables and passed through functions to
+be executed at different points than they were declared. The call format is:
+
+  Fx( anonymous-function , arguments )
+
+Where the arguments will be passed to the anonymous function for execution.
+
+Example:
+>
+  echo '5 * 6 = ' . Fx(Mul, 5, 6)
+<
+
+==============================================================================
+
+3. EXAMPLES                               *vimaholics_anonymous-examples*
+
+Vim's |sort()| function takes an optional |Funcref| for custom sorting. As
+this is a funcref, you do not need to use |va-Fx()| to execute it; Vim will
+execute it directly.
+
+>
+  let x = ["one", "two", "three"]
+  echo sort(x, Fn('(a, b) => len(a:a) > len(a:b)'))
+<
+
+Anonymous functions created with |va-Fn()| can be assigned to variables and
+executed later with |va-Fx()|:
+
+>
+  let Mul = Fn('(a,b) => a:a * a:b')
+  echo '5 * 6 = ' . Fx(Mul, 5, 6)
+<
+
+==============================================================================
+
+Template From: https://github.com/dahu/Area-41/
+ vim:tw=78:ts=8:ft=help:norl:
