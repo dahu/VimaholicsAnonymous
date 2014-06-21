@@ -6,8 +6,19 @@ the things that cannot be called, Tools
 to call the things which should be called,
 And the Mechanics to distinguish the one from the other.__
 
+TIP: If you like Vimaholics Anonymous and want to share the W00t!, I'm grateful for
+https://www.gittip.com/bairuidahu/[tips] or
+http://of-vim-and-vigor.blogspot.com/[beverages].
+
 Vimaholics Anonymous provides anonymous functions for Vim. The Fn() function
 declares an anonymous function and the Fx() function executes an anonymous
 function. An example can be found at
 http://of-vim-and-vigor.blogspot.com/2014/01/anonymous-functions-in-viml.html
 and the plugin https://github.com/dahu/UTest relies on Vimaholics Anonymous.
+
+*New:*
+
+* Partial() for creating partially applied functions
+* Reduce() for folding a list by some function
+
+There are a fex examples of these new features in the ++test/++ directory.
