@@ -35,7 +35,7 @@ function! Fn(fn_form)
   if stridx(fn_body, 'return') == -1
     let b_elems[-1] = 'return ' . b_elems[-1]
   endif
-  exe 'func! ' . fname . fn_args . "\n"
+  exe 'func! ' . fname . fn_args . " dict \n"
         \. join(b_elems, "\n") . "\n"
         \. 'endfunc'
   return function(fname)
